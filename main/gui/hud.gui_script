@@ -1,0 +1,14 @@
+-- hud.gui_script
+
+function init(self)
+	self.node_pontuacao = gui.get_node("txt_pontuacao")
+	self.node_vidas = gui.get_node("txt_vidas")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("atualizar_pontuacao") then
+		gui.set_text(self.node_pontuacao, "Pontos: " .. message.valor)
+	elseif message_id == hash("atualizar_vidas") then
+		gui.set_text(self.node_vidas, "Vidas: " .. message.valor)
+	end
+end

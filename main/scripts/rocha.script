@@ -1,0 +1,33 @@
+-- asteroide.script (versão com colisão)
+
+local VELOCIDADE = 7
+local RAIO_COLISAO = 1.2  -- distância mínima antes de contar colisão
+
+function init(self)
+	self.velocidade = VELOCIDADE + math.random(0, 4)
+	-- Guardar URL da nave para verificar distância
+	self.nave_url = go.get_id("Nave")
+end
+
+function update(self, dt)
+	local pos = go.get_position()
+	pos.z = pos.z + self.velocidade * dt
+	go.set_position(pos)
+
+	-- Verificar colisão com a nave
+	if self.nave_url then
+		local pos_nave = go.get_position(self.nave_url)
+		local distancia = vmath.length(pos - pos_nave)
+
+		if distancia < RAIO_COLISAO then
+			-- Enviar mensagem de colisão ao gestor
+			msg.post("Gestor#gestor", "colisao_nave", {})
+			go.delete()  -- destruir o asteroide
+		end
+	end
+
+	-- Destruir quando sair do ecrã
+	if pos.z > 15 then
+		go.delete()
+	end
+end

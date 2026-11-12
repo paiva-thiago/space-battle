@@ -1,0 +1,40 @@
+fonts {
+  name: "always_on_top"
+  font: "/builtins/fonts/debug/always_on_top.font"
+}
+fonts {
+  name: "default"
+  font: "/builtins/fonts/default.font"
+}
+nodes {
+  position {
+    x: 101.0
+    y: 476.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Pontos: 0"
+  font: "always_on_top"
+  id: "txt_pontuacao"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 75.0
+    y: 35.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Vidas: 3"
+  font: "default"
+  id: "txt_vidas"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
