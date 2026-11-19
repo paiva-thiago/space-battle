@@ -122,8 +122,12 @@ embedded_instances {
   ""
 }
 embedded_instances {
-  id: "Spawner"
-  data: "embedded_components {\n"
+  id: "Gestor"
+  data: "components {\n"
+  "  id: \"gestor\"\n"
+  "  component: \"/main/scripts/gestor.script\"\n"
+  "}\n"
+  "embedded_components {\n"
   "  id: \"factory\"\n"
   "  type: \"factory\"\n"
   "  data: \"prototype: \\\"/main/collections/asteroide.go\\\"\\n"
