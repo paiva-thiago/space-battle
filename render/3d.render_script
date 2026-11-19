@@ -8,6 +8,12 @@ end
 function update(self, dt)
 	local w = render.get_window_width()
 	local h = render.get_window_height()
+
+	-- Predicados criados de forma lazy para sobreviver ao hot reload
+	self.model_predicate = self.model_predicate or render.predicate({"model"})
+	self.gui_predicate = self.gui_predicate or render.predicate({"gui"})
+	self.debug_text_predicate = self.debug_text_predicate or render.predicate({"debug_text"})
+
 	render.set_projection(vmath.matrix4_perspective(
 		math.pi / 4,   -- FOV: 45 graus (era math.pi/3 = 60°)
 		w / h,
@@ -24,6 +30,20 @@ function update(self, dt)
 	})
 
 	render.draw(self.model_predicate)
+
+	-- GUI: desvincula a câmera 3D e usa projeção ortográfica de tela
+	render.set_camera()
+	render.set_view(vmath.matrix4())
+	render.set_projection(vmath.matrix4_orthographic(0, w, 0, h, -1, 1))
+	render.enable_state(graphics.STATE_BLEND)
+	render.disable_state(graphics.STATE_DEPTH_TEST)
+	render.draw(self.gui_predicate)
+
+	-- A fonte "always_on_top" usa o predicado debug_text (é renderizada por cima)
+	render.draw(self.debug_text_predicate)
+
+	render.disable_state(graphics.STATE_BLEND)
+	render.enable_state(graphics.STATE_DEPTH_TEST)
 end
 
 function on_message(self, message_id, message, sender)

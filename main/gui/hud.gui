@@ -1,3 +1,4 @@
+script: "/main/gui/hud.gui_script"
 fonts {
   name: "always_on_top"
   font: "/builtins/fonts/debug/always_on_top.font"
@@ -8,8 +9,8 @@ fonts {
 }
 nodes {
   position {
-    x: 101.0
-    y: 476.0
+    x: 103.0
+    y: 363.0
   }
   size {
     x: 200.0

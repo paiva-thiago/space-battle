@@ -30,7 +30,10 @@ function update(self, dt)
 		self.timer_pontos = 0
 		self.pontuacao = self.pontuacao + 1
 		print("Pontuação: " .. self.pontuacao)
+		msg.post("/hud#hud", "atualizar_pontuacao", {valor_pontos = self.pontuacao})
 	end
+
+	
 end
 
 function spawnar_asteroide(self)
@@ -47,7 +50,8 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("colisao_nave") then
 		self.vidas = self.vidas - 1
 		print("Vidas restantes: " .. self.vidas)
-
+		msg.post("/hud#hud", "atualizar_vidas", {valor_vidas = self.vidas})
+		
 		if self.vidas <= 0 then
 			self.jogo_ativo = false
 			print("GAME OVER! Pontuação: " .. self.pontuacao)

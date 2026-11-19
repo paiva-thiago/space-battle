@@ -7,8 +7,8 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("atualizar_pontuacao") then
-		gui.set_text(self.node_pontuacao, "Pontos: " .. message.valor)
+		gui.set_text(self.node_pontuacao, "Pontos: " .. message.valor_pontos)
 	elseif message_id == hash("atualizar_vidas") then
-		gui.set_text(self.node_vidas, "Vidas: " .. message.valor)
+		gui.set_text(self.node_vidas, "Vidas: " .. message.valor_vidas)
 	end
 end
